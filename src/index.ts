@@ -4,7 +4,7 @@ import * as core from '@actions/core'
 import githubLabelSync, { LabelInfo, Options } from 'github-label-sync'
 import fs from 'fs'
 import path from 'path'
-import yaml from 'js-yaml'
+import yaml from 'yamljs'
 import axios from 'axios'
 
 const { endGroup, getInput, startGroup } = core
@@ -162,7 +162,7 @@ function parseConfigFile(
   if (['.yaml', '.yml'].includes(fileExtension)) {
     // Parse YAML file
     log.info('Parsing YAML file...')
-    parsed = yaml.load(unparsedConfig) as LabelInfo[]
+    parsed = yaml.parse(unparsedConfig)
     try {
       throwConfigError(parsed)
     } catch (e) {
